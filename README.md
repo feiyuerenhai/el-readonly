@@ -39,6 +39,8 @@ export default {
 </script>
 ```
 
+![](https://i.imgur.com/b00lNuQ.jpg)
+
 # 🎮 How
 
 `npm install el-readonly -S`

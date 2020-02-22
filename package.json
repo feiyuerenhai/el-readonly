@@ -1,7 +1,7 @@
 {
   "name": "el-readonly",
   "library": "Readonly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "change input widgets into pure text",
   "author": "454570466@qq.com",
   "private": false,
