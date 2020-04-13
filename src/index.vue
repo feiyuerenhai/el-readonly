@@ -1,5 +1,5 @@
 <template>
-  <div class="el-readonly">
+  <div class="fly-readonly" :style="{display: inline ? 'inline-block': 'block'}">
     <div
       v-if="enabled"
       class="text"
@@ -14,8 +14,9 @@
 
 <script>
 export default {
-  name: "el-readonly",
+  name: "fly-readonly",
   props: {
+    inline: { type: Boolean, default: false },
     enabled: { type: Boolean, default: false },
     ellipsis: { type: Boolean, default: true },
     formatter: { type: Function },
@@ -41,6 +42,9 @@ export default {
       if (tag.indexOf("ElCheckboxGroup") !== -1) {
         return Object.values(componentInstance.value).join(", ")
       }
+      // if (tag.indexOf("ElRadioGroup") !== -1) {
+      //   // 暂未实现
+      // }
       return componentInstance.value
     },
     updateText(tag, componentInstance) {
@@ -50,8 +54,15 @@ export default {
   watch: {
     "slotInstance.value": {
       handler() {
-        const { tag, componentInstance } = this.$slots.default[0]
-        this.updateText(tag, componentInstance)
+        const { tag } = this.$slots.default[0]
+        this.updateText(tag, this.slotInstance)
+      },
+      deep: true
+    },
+    "slotInstance.selectedLabel": {
+      handler() {
+        const { tag } = this.$slots.default[0]
+        this.updateText(tag, this.slotInstance)
       },
       deep: true
     }
@@ -65,7 +76,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-readonly {
+.fly-readonly {
+  vertical-align: middle;
   .text {
     &.ellipsis {
       width: 100%;
